@@ -1,0 +1,1 @@
+INSERT INTO `user-manage`.tq_admin_user_bank (uid, bank_ids, bank_id) VALUES (1, '1', '1');

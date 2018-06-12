@@ -1,1 +1,1 @@
-# hezu
+hezu-server
