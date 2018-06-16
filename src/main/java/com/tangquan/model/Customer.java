@@ -29,6 +29,8 @@ public class Customer {
     @Column(name = "username", nullable = false)
     private String username;
 
+    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
     @ApiModelProperty(value = "创建时间",required = true)
     @Column(name = "create_time", nullable = false)
     private Date create_time;

@@ -1,16 +1,24 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.Customer;
+import com.tangquan.model.Notice;
+import com.tangquan.model.request.CustomerListReq;
+import com.tangquan.model.request.NoticeListReq;
 import com.tangquan.model.response.ApiResponse;
 import com.tangquan.service.CustomerService;
+import com.tangquan.service.NoticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 /**
  * Author: Djoz
@@ -27,9 +35,14 @@ public class ServerWebManagementController {
     CustomerService customerService;
 
     @ApiOperation(value = "用户信息管理菜单")
-    @GetMapping("/user")
-    public ApiResponse<Page<Customer>> user(String username) {
-        return ApiResponse.ok(customerService.getCustomerByMobile(username));
+    @PostMapping("/user")
+    public ApiResponse<Page<Customer>> user(@Validated @RequestBody CustomerListReq customerListReq) {
+        if (Objects.nonNull(customerListReq.getSearch()) && customerListReq.getSearch() != "") {
+            return ApiResponse.ok(customerService.getCustomerByUsername(customerListReq.getSearch()));
+        } else {
+            return ApiResponse.ok(customerService.getAllCustomer(customerListReq));
+        }
+
     }
 
 //    @ApiOperation(value = "房屋信息管理菜单")
@@ -44,10 +57,14 @@ public class ServerWebManagementController {
 //        return ApiResponse.ok(orderRuleService.add(orderRuleReq));
 //    }
 //
-//    @ApiOperation(value = "通知信息管理菜单")
-//    @PostMapping("/notice")
-//    public ApiResponse<Integer> notice(@Validated @RequestBody OrderRuleReq orderRuleReq) {
-//        return ApiResponse.ok(orderRuleService.add(orderRuleReq));
-//    }
+
+    @Autowired
+    NoticeService noticeService;
+
+    @ApiOperation(value = "通知信息管理菜单")
+    @PostMapping("/notice")
+    public ApiResponse<Page<Notice>> notice(@Validated @RequestBody NoticeListReq noticeListReq) {
+        return ApiResponse.ok(noticeService.getAllNotice(noticeListReq));
+    }
 
 }

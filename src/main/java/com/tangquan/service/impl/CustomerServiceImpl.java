@@ -1,6 +1,7 @@
 package com.tangquan.service.impl;
 
 import com.tangquan.model.Customer;
+import com.tangquan.model.request.CustomerListReq;
 import com.tangquan.repository.CustomerRepository;
 import com.tangquan.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +21,20 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepository;
 
     @Override
-    public Page<Customer> getCustomerByMobile(String username) {
-        Page<Customer> customerList = customerRepository.findAll(new PageRequest(0, 10));
-//        Page<Customer> customerList = new ArrayList<Customer>();
-//        if (Objects.nonNull(username)) {
-//            Customer customer= customerRepository.findOneByUsername(username);
-//            customerList.add(customer);
-//            return customerList;
-//        } else {
-//            customerList = (List<Customer>) customerRepository.findAll(new PageRequest(1, 20));
-//        }
+    public Page<Customer> getCustomerByUsername(String username) {
 
-        customerList.add()
+//        List customerList = new ArrayList<Customer>();
+//
+//        Customer customer= customerRepository.findOneByUsername(username, new PageRequest(0, 10));
+//        customerList.add(customer);
+
+        Page<Customer> customerList = customerRepository.findByUsernameLike(username, new PageRequest(0, 10));
+        return customerList;
+    }
+
+    @Override
+    public Page<Customer> getAllCustomer(CustomerListReq customerListReq) {
+        Page<Customer> customerList = customerRepository.findAll(new PageRequest(Integer.valueOf(customerListReq.getPage()), Integer.valueOf(customerListReq.getLimit())));
 
         return customerList;
     }
