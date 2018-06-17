@@ -15,8 +15,8 @@ import java.util.Date;
  */
 @ApiModel(value = "Notice",description = "消息")
 @Entity
-@Table(name="hezu_message_customer_view")
-public class Notice {
+@Table(name="hezu_message")
+public class AddNotice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,13 +49,10 @@ public class Notice {
 
     @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(value = "创建时间",required = true)
     @Column(name = "create_time", nullable = false)
     private Date create_time;
-
-    @ApiModelProperty(value = "账户名-手机号",required = true)
-    @Column(name = "username", nullable = false)
-    private String username;
 
     public Integer getId() {
         return id;
@@ -120,13 +117,4 @@ public class Notice {
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
 }

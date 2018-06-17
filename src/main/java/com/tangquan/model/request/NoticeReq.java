@@ -1,69 +1,40 @@
-package com.tangquan.model;
+package com.tangquan.model.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Author: wangfeng
  * Date: 17/12/1
  * Time: 下午2:50
  */
-@ApiModel(value = "Notice",description = "消息")
-@Entity
-@Table(name="hezu_message_customer_view")
-public class Notice {
+@ApiModel(value = "NoticeReq",description = "通知信息")
+public class NoticeReq {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @ApiModelProperty(value = "id",required = true)
-    private Integer id;
 
     @ApiModelProperty(value = "客户对应id",required = true)
-    @Column(name = "customer_id", nullable = false)
     private Integer customer_id;
 
+
     @ApiModelProperty(value = "发送方式",required = true)
-    @Column(name = "method", nullable = false)
     private Integer method;
 
+
     @ApiModelProperty(value = "发送类别对应id",required = true)
-    @Column(name = "type", nullable = false)
     private Integer type;
 
+
     @ApiModelProperty(value = "关联产品id",required = true)
-    @Column(name = "product_id", nullable = false)
     private Integer product_id;
 
+
     @ApiModelProperty(value = "内容",required = true)
-    @Column(name = "text", nullable = false)
     private String text;
 
+
     @ApiModelProperty(value = "关联产品类别",required = true)
-    @Column(name = "product_type", nullable = false)
     private Integer product_type;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
-    @ApiModelProperty(value = "创建时间",required = true)
-    @Column(name = "create_time", nullable = false)
-    private Date create_time;
-
-    @ApiModelProperty(value = "账户名-手机号",required = true)
-    @Column(name = "username", nullable = false)
-    private String username;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getCustomer_id() {
         return customer_id;
@@ -112,21 +83,4 @@ public class Notice {
     public void setProduct_type(Integer product_type) {
         this.product_type = product_type;
     }
-
-    public Date getCreate_time() {
-        return create_time;
-    }
-
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
 }

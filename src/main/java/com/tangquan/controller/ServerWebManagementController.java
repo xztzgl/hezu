@@ -1,12 +1,15 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.Customer;
+import com.tangquan.model.House;
 import com.tangquan.model.Notice;
-import com.tangquan.model.request.CustomerListReq;
-import com.tangquan.model.request.NoticeListReq;
+import com.tangquan.model.Person;
+import com.tangquan.model.request.*;
 import com.tangquan.model.response.ApiResponse;
 import com.tangquan.service.CustomerService;
+import com.tangquan.service.HouseService;
 import com.tangquan.service.NoticeService;
+import com.tangquan.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -45,18 +49,25 @@ public class ServerWebManagementController {
 
     }
 
-//    @ApiOperation(value = "房屋信息管理菜单")
-//    @PostMapping("/house")
-//    public ApiResponse<Integer> house(@Validated @RequestBody OrderRuleReq orderRuleReq) {
-//        return ApiResponse.ok(orderRuleService.add(orderRuleReq));
-//    }
-//
-//    @ApiOperation(value = "找人信息管理菜单")
-//    @PostMapping("/partner")
-//    public ApiResponse<Integer> partner(@Validated @RequestBody OrderRuleReq orderRuleReq) {
-//        return ApiResponse.ok(orderRuleService.add(orderRuleReq));
-//    }
-//
+
+    @Autowired
+    HouseService houseService;
+
+    @ApiOperation(value = "房屋信息管理菜单")
+    @PostMapping("/house")
+    public ApiResponse<Page<House>> house(@Validated @RequestBody HouseListReq houseListReq) {
+        return ApiResponse.ok(houseService.getAllHouse(houseListReq));
+    }
+
+    @Autowired
+    PersonService personService;
+
+    @ApiOperation(value = "找人信息管理菜单")
+    @PostMapping("/partner")
+    public ApiResponse<Page<Person>> partner(@Validated @RequestBody PersonListReq personListReq) {
+        return ApiResponse.ok(personService.getAllPerson(personListReq));
+    }
+
 
     @Autowired
     NoticeService noticeService;
@@ -65,6 +76,12 @@ public class ServerWebManagementController {
     @PostMapping("/notice")
     public ApiResponse<Page<Notice>> notice(@Validated @RequestBody NoticeListReq noticeListReq) {
         return ApiResponse.ok(noticeService.getAllNotice(noticeListReq));
+    }
+
+    @ApiOperation(value = "添加通知信息")
+    @PostMapping("/notice/add")
+    public ApiResponse<Map> add(@Validated @RequestBody NoticeReq noticeReq) {
+        return ApiResponse.ok(noticeService.add(noticeReq));
     }
 
 }
