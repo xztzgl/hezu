@@ -3,7 +3,6 @@ package com.tangquan.framework;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -14,7 +13,7 @@ public class FilterConfig {
     @Bean
     public FilterRegistrationBean jwtFilterRegistration(JWTFilter filter) {
         FilterRegistrationBean registrationBean = newFilterRegistrationBean(filter, 11);
-        String[] patterns = new String[]{"/admin-user/*", "/auth-group/*", "/order-manage/*"};
+        String[] patterns = new String[]{"/admin-user/*", "/auth-group/*", "/order-manage/*", "/server-web-management/*"};
         registrationBean.addUrlPatterns(patterns);
         return registrationBean;
     }

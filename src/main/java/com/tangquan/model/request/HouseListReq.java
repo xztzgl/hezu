@@ -21,6 +21,18 @@ public class HouseListReq {
     @ApiModelProperty(value = "第几页")
     private String page;
 
+//    以下为wechat端使用
+//    @ApiModelProperty(value = "按片区")
+//    private String page;
+//
+//    @ApiModelProperty(value = "按户型")
+//    private String page;
+//
+//    @ApiModelProperty(value = "按价格")
+//    private String page;
+
+
+
     public String getLimit() {
         return limit;
     }

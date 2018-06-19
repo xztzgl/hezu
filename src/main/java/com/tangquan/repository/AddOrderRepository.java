@@ -1,6 +1,6 @@
 package com.tangquan.repository;
 
-import com.tangquan.model.House;
+import com.tangquan.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +11,7 @@ import org.springframework.stereotype.Repository;
  * Time: 下午5:47
  */
 @Repository
-public interface HouseRepository extends JpaRepository<House,Integer> {
+public interface AddOrderRepository extends JpaRepository<Order,Integer> {
 
-    House findOneById(Integer id);
-
+    Order findOneById(Integer id);
 }

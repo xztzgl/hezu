@@ -1,9 +1,14 @@
 package com.tangquan.service;
 
 
+import com.tangquan.model.AddHouse;
+import com.tangquan.model.Evaluate;
 import com.tangquan.model.House;
 import com.tangquan.model.request.HouseListReq;
+import com.tangquan.model.request.OrderReq;
 import org.springframework.data.domain.Page;
+
+import java.util.Map;
 
 /**
  * 管理员服务
@@ -19,4 +24,30 @@ public interface HouseService {
      */
     Page<House> getAllHouse(HouseListReq houseListReq);
 
+    /**
+     * 添加
+     * @param addHouse
+     */
+    Map add(AddHouse addHouse);
+
+    /**
+     * 修改
+     * @param addHouse
+     */
+    Map update(AddHouse addHouse);
+
+    /**删除
+     * @param id
+     */
+    Map delete(Integer id);
+
+    /**预约
+     * @param orderReq
+     */
+    Map order(OrderReq orderReq);
+
+    /**评价
+     * @param evaluate
+     */
+    Map evaluate(Evaluate evaluate);
 }

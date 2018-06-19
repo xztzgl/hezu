@@ -60,8 +60,8 @@ public class Person {
     private Integer creator_id;
 
     @ApiModelProperty(value = "发布状态对应的id",required = true)
-    @Column(name = "status_id", nullable = false)
-    private Integer status_id;
+    @Column(name = "publish_id", nullable = false)
+    private Integer publish_id;
 
     @ApiModelProperty(value = "信息可见的时间对应的id",required = true)
     @Column(name = "seentime_id", nullable = false)
@@ -73,6 +73,14 @@ public class Person {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getDistrict_id() {
@@ -131,12 +139,12 @@ public class Person {
         this.creator_id = creator_id;
     }
 
-    public Integer getStatus_id() {
-        return status_id;
+    public Integer getPublish_id() {
+        return publish_id;
     }
 
-    public void setStatus_id(Integer status_id) {
-        this.status_id = status_id;
+    public void setPublish_id(Integer publish_id) {
+        this.publish_id = publish_id;
     }
 
     public Integer getSeentime_id() {
@@ -145,13 +153,5 @@ public class Person {
 
     public void setSeentime_id(Integer seentime_id) {
         this.seentime_id = seentime_id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

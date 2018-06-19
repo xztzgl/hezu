@@ -16,18 +16,15 @@ import java.util.Date;
  * Date: 17/12/1
  * Time: 下午2:50
  */
-@ApiModel(value = "House",description = "房屋信息")
+@ApiModel(value = "AddHouse",description = "房屋信息")
 @Entity
-@Table(name="hezu_product_house_customer_view")
-public class House {
+@Table(name="hezu_product_house")
+public class AddHouse {
 
     @Id
-    @ApiModelProperty(value = "id",required = true)
+    @ApiModelProperty(value = "id")
     private Integer id;
 
-    @ApiModelProperty(value = "账户名-手机号",required = true)
-    @Column(name = "username", nullable = false)
-    private String username;
 
     @ApiModelProperty(value = "上传图片对应的id，用“,”分隔",required = true)
     @Column(name = "image_id", nullable = false)
@@ -39,7 +36,7 @@ public class House {
 
     @ApiModelProperty(value = "所在区域的id",required = true)
     @Column(name = "district_id", nullable = false)
-    private Integer district_id;
+    private String district_id;
 
     @ApiModelProperty(value = "小区名称",required = true)
     @Column(name = "house_name", nullable = false)
@@ -47,23 +44,23 @@ public class House {
 
     @ApiModelProperty(value = "合租类型对应的id",required = true)
     @Column(name = "renttype_id", nullable = false)
-    private Integer renttype_id;
+    private String renttype_id;
 
     @ApiModelProperty(value = "楼层-第几层",required = true)
     @Column(name = "floor_layer", nullable = false)
-    private Integer floor_layer;
+    private String floor_layer;
 
     @ApiModelProperty(value = "楼层-总层数",required = true)
     @Column(name = "floor_total", nullable = false)
-    private Integer floor_total;
+    private String floor_total;
 
     @ApiModelProperty(value = "建筑面积",required = true)
     @Column(name = "built_area", nullable = false)
-    private Integer built_area;
+    private String built_area;
 
     @ApiModelProperty(value = "租金",required = true)
     @Column(name = "rental", nullable = false)
-    private Integer rental;
+    private String rental;
 
     @ApiModelProperty(value = "配套设施对应的id",required = true)
     @Column(name = "infrastructure_id", nullable = false)
@@ -71,11 +68,11 @@ public class House {
 
     @ApiModelProperty(value = "户型对应id",required = true)
     @Column(name = "housetype_id", nullable = false)
-    private Integer housetype_id;
+    private String housetype_id;
 
     @ApiModelProperty(value = "性别限制 对应性别id",required = true)
     @Column(name = "gender_id", nullable = false)
-    private Integer gender_id;
+    private String gender_id;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
@@ -89,15 +86,15 @@ public class House {
 
     @ApiModelProperty(value = "装修对应的id",required = true)
     @Column(name = "decoration_id", nullable = false)
-    private Integer decoration_id;
+    private String decoration_id;
 
     @ApiModelProperty(value = "支付方式对应id",required = true)
     @Column(name = "payment_id", nullable = false)
-    private Integer payment_id;
+    private String payment_id;
 
     @ApiModelProperty(value = "信息可见的时间对应的id",required = true)
     @Column(name = "seentime_id", nullable = false)
-    private Integer seentime_id;
+    private String seentime_id;
 
     @ApiModelProperty(value = "描述",required = true)
     @Column(name = "description", nullable = false)
@@ -105,11 +102,11 @@ public class House {
 
     @ApiModelProperty(value = "发布者对应的id",required = true)
     @Column(name = "creator_id", nullable = false)
-    private Integer creator_id;
+    private String creator_id;
 
     @ApiModelProperty(value = "发布状态对应的id",required = true)
     @Column(name = "publish_id", nullable = false)
-    private Integer publish_id;
+    private String publish_id;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
@@ -117,22 +114,12 @@ public class House {
     @Column(name = "create_time", nullable = false)
     private Date create_time;
 
-
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getImage_id() {
@@ -151,11 +138,11 @@ public class House {
         this.title = title;
     }
 
-    public Integer getDistrict_id() {
+    public String getDistrict_id() {
         return district_id;
     }
 
-    public void setDistrict_id(Integer district_id) {
+    public void setDistrict_id(String district_id) {
         this.district_id = district_id;
     }
 
@@ -167,43 +154,43 @@ public class House {
         this.house_name = house_name;
     }
 
-    public Integer getRenttype_id() {
+    public String getRenttype_id() {
         return renttype_id;
     }
 
-    public void setRenttype_id(Integer renttype_id) {
+    public void setRenttype_id(String renttype_id) {
         this.renttype_id = renttype_id;
     }
 
-    public Integer getFloor_layer() {
+    public String getFloor_layer() {
         return floor_layer;
     }
 
-    public void setFloor_layer(Integer floor_layer) {
+    public void setFloor_layer(String floor_layer) {
         this.floor_layer = floor_layer;
     }
 
-    public Integer getFloor_total() {
+    public String getFloor_total() {
         return floor_total;
     }
 
-    public void setFloor_total(Integer floor_total) {
+    public void setFloor_total(String floor_total) {
         this.floor_total = floor_total;
     }
 
-    public Integer getBuilt_area() {
+    public String getBuilt_area() {
         return built_area;
     }
 
-    public void setBuilt_area(Integer built_area) {
+    public void setBuilt_area(String built_area) {
         this.built_area = built_area;
     }
 
-    public Integer getRental() {
+    public String getRental() {
         return rental;
     }
 
-    public void setRental(Integer rental) {
+    public void setRental(String rental) {
         this.rental = rental;
     }
 
@@ -215,19 +202,19 @@ public class House {
         this.infrastructure_id = infrastructure_id;
     }
 
-    public Integer getHousetype_id() {
+    public String getHousetype_id() {
         return housetype_id;
     }
 
-    public void setHousetype_id(Integer housetype_id) {
+    public void setHousetype_id(String housetype_id) {
         this.housetype_id = housetype_id;
     }
 
-    public Integer getGender_id() {
+    public String getGender_id() {
         return gender_id;
     }
 
-    public void setGender_id(Integer gender_id) {
+    public void setGender_id(String gender_id) {
         this.gender_id = gender_id;
     }
 
@@ -247,27 +234,27 @@ public class House {
         this.orientation_id = orientation_id;
     }
 
-    public Integer getDecoration_id() {
+    public String getDecoration_id() {
         return decoration_id;
     }
 
-    public void setDecoration_id(Integer decoration_id) {
+    public void setDecoration_id(String decoration_id) {
         this.decoration_id = decoration_id;
     }
 
-    public Integer getPayment_id() {
+    public String getPayment_id() {
         return payment_id;
     }
 
-    public void setPayment_id(Integer payment_id) {
+    public void setPayment_id(String payment_id) {
         this.payment_id = payment_id;
     }
 
-    public Integer getSeentime_id() {
+    public String getSeentime_id() {
         return seentime_id;
     }
 
-    public void setSeentime_id(Integer seentime_id) {
+    public void setSeentime_id(String seentime_id) {
         this.seentime_id = seentime_id;
     }
 
@@ -279,19 +266,19 @@ public class House {
         this.description = description;
     }
 
-    public Integer getCreator_id() {
+    public String getCreator_id() {
         return creator_id;
     }
 
-    public void setCreator_id(Integer creator_id) {
+    public void setCreator_id(String creator_id) {
         this.creator_id = creator_id;
     }
 
-    public Integer getPublish_id() {
+    public String getPublish_id() {
         return publish_id;
     }
 
-    public void setPublish_id(Integer publish_id) {
+    public void setPublish_id(String publish_id) {
         this.publish_id = publish_id;
     }
 
