@@ -25,6 +25,12 @@ public interface HouseService {
     Page<House> getAllHouse(HouseListReq houseListReq);
 
     /**
+     * 根据条件获取所有用户列表
+     * @return
+     */
+    Map getAllHouseBySearch(HouseListReq houseListReq);
+
+    /**
      * 添加
      * @param addHouse
      */

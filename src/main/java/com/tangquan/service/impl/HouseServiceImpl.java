@@ -1,9 +1,6 @@
 package com.tangquan.service.impl;
 
-import com.tangquan.model.AddHouse;
-import com.tangquan.model.Evaluate;
-import com.tangquan.model.House;
-import com.tangquan.model.Order;
+import com.tangquan.model.*;
 import com.tangquan.model.request.HouseListReq;
 import com.tangquan.model.request.OrderReq;
 import com.tangquan.repository.AddHouseRepository;
@@ -16,10 +13,16 @@ import com.tangquan.system.exception.ApiException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,6 +44,95 @@ public class HouseServiceImpl implements HouseService {
 
         return houseList;
     }
+
+    @Override
+    public Map getAllHouseBySearch(HouseListReq houseListReq) {
+
+        //构建Query，注意用的是HQL语法
+        String sql = "select t from House t where t.id <> 0";
+
+        Integer page = 0;
+        Integer limit = 10;
+
+        if(houseListReq.getPage() != null && houseListReq.getPage() != ""){//判断keyword是否为空
+            page = Integer.valueOf(houseListReq.getPage());
+        }
+        if(houseListReq.getLimit() != null && houseListReq.getLimit() != ""){//判断keyword是否为空
+            limit = Integer.valueOf(houseListReq.getLimit());
+        }
+        if(houseListReq.getDistrict_id() != null && houseListReq.getDistrict_id() != ""){//判断keyword是否为空
+            sql += " and t.district_id = :district_id"; //根据下标
+        }
+        if(houseListReq.getHousetype_id() != null && houseListReq.getHousetype_id() != ""){//判断keyword是否为空
+            sql += " and t.housetype_id = :housetype_id"; //根据下标
+        }
+        if(houseListReq.getRental_id() != null && houseListReq.getRental_id() != ""){//判断keyword是否为空
+            sql += " and t.rental >= :rental_min"; //根据下标
+            sql += " and t.rental < :rental_max"; //根据下标
+        }
+
+        Query query = em.createQuery(sql);// 这里做个更正
+
+        query.setFirstResult(page * limit);
+        query.setMaxResults(limit);
+
+
+        if(houseListReq.getDistrict_id() != null && houseListReq.getDistrict_id() != ""){//判断keyword是否为空
+            query.setParameter("district_id", Integer.valueOf(houseListReq.getDistrict_id())); //根据下标
+        }
+        if(houseListReq.getHousetype_id() != null && houseListReq.getHousetype_id() != ""){//判断keyword是否为空
+            query.setParameter("housetype_id", Integer.valueOf(houseListReq.getHousetype_id())); //根据下标
+        }
+        if(houseListReq.getRental_id() != null && houseListReq.getRental_id() != ""){//判断keyword是否为空
+            String rental_id = houseListReq.getRental_id();
+            // 与codeMap字典表对应
+            switch (rental_id) {
+                // 0-1500
+                case "20401":
+                    query.setParameter("rental_min", 0);
+                    query.setParameter("rental_max", 1500);
+                    break;
+
+                // 1500-3000
+                case "20402":
+                    query.setParameter("rental_min", 1500);
+                    query.setParameter("rental_max", 3000);
+                    break;
+
+                // 3000-4500
+                case "20403":
+                    query.setParameter("rental_min", 3000);
+                    query.setParameter("rental_max", 4500);
+                    break;
+
+                // 4500-
+                case "20404":
+                    query.setParameter("rental_min", 4500);
+                    query.setParameter("rental_max", 100000);
+                    break;
+
+                default:
+                    query.setParameter("rental_min", 0); //根据下标
+                    query.setParameter("rental_max", 0); //根据下标
+                    break;
+            }
+
+        }
+
+
+        //查询
+        List<House> houseList = query.getResultList();
+        Map pageList = new HashMap();
+        pageList.put("content", houseList);
+        pageList.put("page", page);
+        pageList.put("limit", limit);
+
+        return pageList;
+    }
+
+    @PersistenceContext
+    private EntityManager em; //注入EntityManager
+
 
     @Autowired
     AddHouseRepository addHouseRepository;

@@ -2,7 +2,6 @@ package com.tangquan.controller;
 
 import com.tangquan.model.AddHouse;
 import com.tangquan.model.Evaluate;
-import com.tangquan.model.House;
 import com.tangquan.model.request.HouseListReq;
 import com.tangquan.model.request.OrderReq;
 import com.tangquan.model.response.ApiResponse;
@@ -11,7 +10,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +32,8 @@ public class WechatHouseController {
 
     @ApiOperation(value = "房屋列表")
     @PostMapping("/list")
-    public ApiResponse<Page<House>> list(@Validated @RequestBody HouseListReq houseListReq) {
-        return ApiResponse.ok(houseService.getAllHouse(houseListReq));
+    public ApiResponse<Map> list(@Validated @RequestBody HouseListReq houseListReq) {
+        return ApiResponse.ok(houseService.getAllHouseBySearch(houseListReq));
     }
 
 

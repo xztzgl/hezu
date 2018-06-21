@@ -23,6 +23,12 @@ public interface PersonService {
     Page<Person> getAllPerson(PersonListReq personListReq);
 
     /**
+     * 根据条件获取所有用户列表
+     * @return
+     */
+    Map getAllPersonBySearch(PersonListReq personListReq);
+
+    /**
      * 添加
      * @param addPerson
      */

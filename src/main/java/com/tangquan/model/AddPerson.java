@@ -59,6 +59,10 @@ public class AddPerson {
     @Column(name = "creator_id", nullable = false)
     private String creator_id;
 
+    @ApiModelProperty(value = "户型对应id",required = true)
+    @Column(name = "housetype_id", nullable = false)
+    private Integer housetype_id;
+
     @ApiModelProperty(value = "发布状态对应的id",required = true)
     @Column(name = "publish_id", nullable = false)
     private String publish_id;
@@ -159,5 +163,13 @@ public class AddPerson {
 
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
+    }
+
+    public Integer getHousetype_id() {
+        return housetype_id;
+    }
+
+    public void setHousetype_id(Integer housetype_id) {
+        this.housetype_id = housetype_id;
     }
 }

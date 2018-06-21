@@ -37,6 +37,10 @@ public class Person {
     @Column(name = "renttype_id", nullable = false)
     private Integer renttype_id;
 
+    @ApiModelProperty(value = "户型对应id",required = true)
+    @Column(name = "housetype_id", nullable = false)
+    private Integer housetype_id;
+
     @ApiModelProperty(value = "性别限制 对应性别id",required = true)
     @Column(name = "gender_id", nullable = false)
     private Integer gender_id;
@@ -153,5 +157,13 @@ public class Person {
 
     public void setSeentime_id(Integer seentime_id) {
         this.seentime_id = seentime_id;
+    }
+
+    public Integer getHousetype_id() {
+        return housetype_id;
+    }
+
+    public void setHousetype_id(Integer housetype_id) {
+        this.housetype_id = housetype_id;
     }
 }

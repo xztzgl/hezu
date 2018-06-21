@@ -21,6 +21,16 @@ public class PersonListReq {
     @ApiModelProperty(value = "第几页")
     private String page;
 
+    //    以下为wechat端使用
+    @ApiModelProperty(value = "按片区")
+    private String district_id;
+
+    @ApiModelProperty(value = "按户型")
+    private String housetype_id;
+
+    @ApiModelProperty(value = "按价格")
+    private String rental_id;
+
     public String getLimit() {
         return limit;
     }
@@ -35,5 +45,29 @@ public class PersonListReq {
 
     public void setPage(String page) {
         this.page = page;
+    }
+
+    public String getDistrict_id() {
+        return district_id;
+    }
+
+    public void setDistrict_id(String district_id) {
+        this.district_id = district_id;
+    }
+
+    public String getHousetype_id() {
+        return housetype_id;
+    }
+
+    public void setHousetype_id(String housetype_id) {
+        this.housetype_id = housetype_id;
+    }
+
+    public String getRental_id() {
+        return rental_id;
+    }
+
+    public void setRental_id(String rental_id) {
+        this.rental_id = rental_id;
     }
 }

@@ -1,10 +1,9 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.AddPerson;
-import com.tangquan.model.Customer;
 import com.tangquan.model.House;
-import com.tangquan.model.request.CustomerListReq;
 import com.tangquan.model.request.HouseListReq;
+import com.tangquan.model.request.PersonListReq;
 import com.tangquan.model.response.ApiResponse;
 import com.tangquan.service.CustomerService;
 import com.tangquan.service.HouseService;
@@ -19,7 +18,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Author: Djoz
@@ -37,13 +35,8 @@ public class WechatPersonController {
 
     @ApiOperation(value = "合租人列表")
     @PostMapping("/list")
-    public ApiResponse<Page<Customer>> list(@Validated @RequestBody CustomerListReq customerListReq) {
-        if (Objects.nonNull(customerListReq.getSearch()) && customerListReq.getSearch() != "") {
-            return ApiResponse.ok(customerService.getCustomerByUsername(customerListReq.getSearch()));
-        } else {
-            return ApiResponse.ok(customerService.getAllCustomer(customerListReq));
-        }
-
+    public ApiResponse<Map> list(@Validated @RequestBody PersonListReq personListReq) {
+        return ApiResponse.ok(personService.getAllPersonBySearch(personListReq));
     }
 
 

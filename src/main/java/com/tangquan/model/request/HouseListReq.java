@@ -26,7 +26,7 @@ public class HouseListReq {
     private String housetype_id;
 
     @ApiModelProperty(value = "按价格")
-    private String rental;
+    private String rental_id;
 
 
 
@@ -62,11 +62,11 @@ public class HouseListReq {
         this.housetype_id = housetype_id;
     }
 
-    public String getRental() {
-        return rental;
+    public String getRental_id() {
+        return rental_id;
     }
 
-    public void setRental(String rental) {
-        this.rental = rental;
+    public void setRental_id(String rental_id) {
+        this.rental_id = rental_id;
     }
 }
