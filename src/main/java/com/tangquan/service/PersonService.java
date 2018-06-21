@@ -1,9 +1,12 @@
 package com.tangquan.service;
 
 
+import com.tangquan.model.AddPerson;
 import com.tangquan.model.Person;
 import com.tangquan.model.request.PersonListReq;
 import org.springframework.data.domain.Page;
+
+import java.util.Map;
 
 /**
  * 管理员服务
@@ -18,5 +21,22 @@ public interface PersonService {
      * @return
      */
     Page<Person> getAllPerson(PersonListReq personListReq);
+
+    /**
+     * 添加
+     * @param addPerson
+     */
+    Map add(AddPerson addPerson);
+
+    /**
+     * 修改
+     * @param addPerson
+     */
+    Map update(AddPerson addPerson);
+
+    /**删除
+     * @param id
+     */
+    Map delete(Integer id);
 
 }

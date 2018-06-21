@@ -1,6 +1,6 @@
 package com.tangquan.repository;
 
-import com.tangquan.model.Person;
+import com.tangquan.model.AddPerson;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Time: 下午5:47
  */
 @Repository
-public interface PersonRepository extends JpaRepository<Person,Integer> {
+public interface AddPersonRepository extends JpaRepository<AddPerson,Integer> {
 
-    Person findOneById(Integer id);
+    AddPerson findOneById(Integer id);
 }

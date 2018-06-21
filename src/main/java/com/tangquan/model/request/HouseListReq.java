@@ -11,9 +11,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "HouseListReq",description = "房源列表")
 public class HouseListReq {
 
-//    @NotEmpty(message = "ORDER_RULE_NAME_EMPTY")
-//    @ApiModelProperty(value = "用户名")
-//    private String search;
 
     @ApiModelProperty(value = "每页条数")
     private String limit;
@@ -22,14 +19,14 @@ public class HouseListReq {
     private String page;
 
 //    以下为wechat端使用
-//    @ApiModelProperty(value = "按片区")
-//    private String page;
-//
-//    @ApiModelProperty(value = "按户型")
-//    private String page;
-//
-//    @ApiModelProperty(value = "按价格")
-//    private String page;
+    @ApiModelProperty(value = "按片区")
+    private String district_id;
+
+    @ApiModelProperty(value = "按户型")
+    private String housetype_id;
+
+    @ApiModelProperty(value = "按价格")
+    private String rental;
 
 
 
@@ -47,5 +44,29 @@ public class HouseListReq {
 
     public void setPage(String page) {
         this.page = page;
+    }
+
+    public String getDistrict_id() {
+        return district_id;
+    }
+
+    public void setDistrict_id(String district_id) {
+        this.district_id = district_id;
+    }
+
+    public String getHousetype_id() {
+        return housetype_id;
+    }
+
+    public void setHousetype_id(String housetype_id) {
+        this.housetype_id = housetype_id;
+    }
+
+    public String getRental() {
+        return rental;
+    }
+
+    public void setRental(String rental) {
+        this.rental = rental;
     }
 }

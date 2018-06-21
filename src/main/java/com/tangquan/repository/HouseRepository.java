@@ -15,4 +15,8 @@ public interface HouseRepository extends JpaRepository<House,Integer> {
 
     House findOneById(Integer id);
 
+
+//    @Query("select a from House a where a.district_id=?1 and a.housetype_id=1")
+//    Page<House> findAllBySearch(PageRequest pageRequest);
+
 }
