@@ -1,9 +1,10 @@
 package com.tangquan.controller;
 
-import com.tangquan.model.Person;
-import com.tangquan.model.request.PersonListReq;
+import com.tangquan.model.Favorite;
+import com.tangquan.model.FavoriteProductView;
+import com.tangquan.model.request.FavoriteListReq;
 import com.tangquan.model.response.ApiResponse;
-import com.tangquan.service.PersonService;
+import com.tangquan.service.FavoriteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * Author: Djoz
@@ -28,12 +31,24 @@ public class WechatFavoriteController {
 
 
     @Autowired
-    PersonService personService;
+    FavoriteService favoriteService;
+
+    @ApiOperation(value = "房屋列表")
+    @PostMapping("/list")
+    public ApiResponse<Page<FavoriteProductView>> list(@Validated @RequestBody FavoriteListReq favoriteListReq) {
+        return ApiResponse.ok(favoriteService.getAllFavoriteBySearch(favoriteListReq));
+    }
 
     @ApiOperation(value = "新增收藏")
     @PostMapping("/add")
-    public ApiResponse<Page<Person>> add(@Validated @RequestBody PersonListReq personListReq) {
-        return ApiResponse.ok(personService.getAllPerson(personListReq));
+    public ApiResponse<Map> add(@Validated @RequestBody Favorite favorite) {
+        return ApiResponse.ok(favoriteService.add(favorite));
+    }
+
+    @ApiOperation(value = "删除收藏")
+    @PostMapping("/delete")
+    public ApiResponse<Map> delete(@Validated @RequestBody Favorite favorite) {
+        return ApiResponse.ok(favoriteService.delete(favorite));
     }
 
 
