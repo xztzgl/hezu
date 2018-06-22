@@ -22,6 +22,9 @@ public class OrderListReq {
     @ApiModelProperty(value = "客户对应的id",required = true)
     private String customer_id;
 
+    @ApiModelProperty(value = "订单状态对应的id",required = true)
+    private String status_id;
+
 
     public String getLimit() {
         return limit;
@@ -45,5 +48,13 @@ public class OrderListReq {
 
     public void setCustomer_id(String customer_id) {
         this.customer_id = customer_id;
+    }
+
+    public String getStatus_id() {
+        return status_id;
+    }
+
+    public void setStatus_id(String status_id) {
+        this.status_id = status_id;
     }
 }

@@ -1,6 +1,7 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.AddHouse;
+import com.tangquan.model.request.DetailReq;
 import com.tangquan.model.request.HouseListReq;
 import com.tangquan.model.response.ApiResponse;
 import com.tangquan.service.HouseService;
@@ -36,11 +37,11 @@ public class WechatHouseController {
 
 
 
-//    @ApiOperation(value = "房屋详情")
-//    @PostMapping("/get")
-//    public ApiResponse<Page<House>> get(@Validated @RequestBody HouseListReq houseListReq) {
-//        return ApiResponse.ok(houseService.getAllHouse(houseListReq));
-//    }
+    @ApiOperation(value = "房屋详情")
+    @PostMapping("/get")
+    public ApiResponse<Map> get(@Validated @RequestBody DetailReq detailReq) {
+        return ApiResponse.ok(houseService.findOneById(detailReq));
+    }
 
 
     @ApiOperation(value = "新增房屋")

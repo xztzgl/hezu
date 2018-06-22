@@ -71,6 +71,12 @@ public class Person {
     @Column(name = "seentime_id", nullable = false)
     private Integer seentime_id;
 
+    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @ApiModelProperty(value = "创建时间",required = true)
+    @Column(name = "create_time", nullable = false)
+    private Date create_time;
+
     public Integer getId() {
         return id;
     }
@@ -165,5 +171,13 @@ public class Person {
 
     public void setHousetype_id(Integer housetype_id) {
         this.housetype_id = housetype_id;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
     }
 }

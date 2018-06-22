@@ -3,6 +3,7 @@ package com.tangquan.service;
 
 import com.tangquan.model.AddPerson;
 import com.tangquan.model.Person;
+import com.tangquan.model.request.DetailReq;
 import com.tangquan.model.request.PersonListReq;
 import org.springframework.data.domain.Page;
 
@@ -44,5 +45,7 @@ public interface PersonService {
      * @param id
      */
     Map delete(Integer id);
+
+    Map findOneById(DetailReq detailReq);
 
 }

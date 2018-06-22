@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     OrderListRepository orderListRepository;
     @Override
     public Page<OrderProductView> getAllOrderBySearch(OrderListReq orderListReq) {
-        Page<OrderProductView> favoriteList = orderListRepository.findByCustomer_id(orderListReq.getCustomer_id(), new PageRequest(Integer.valueOf(orderListReq.getPage()), Integer.valueOf(orderListReq.getLimit())));
+        Page<OrderProductView> favoriteList = orderListRepository.findByCustomer_id(orderListReq.getCustomer_id(), orderListReq.getStatus_id(), new PageRequest(Integer.valueOf(orderListReq.getPage()), Integer.valueOf(orderListReq.getLimit())));
 
         return favoriteList;
     }

@@ -1,11 +1,12 @@
 package com.tangquan.service.impl;
 
-import com.tangquan.model.AddPerson;
-import com.tangquan.model.House;
-import com.tangquan.model.Person;
+import com.tangquan.model.*;
+import com.tangquan.model.request.DetailReq;
 import com.tangquan.model.request.HouseListReq;
 import com.tangquan.model.request.PersonListReq;
 import com.tangquan.repository.AddPersonRepository;
+import com.tangquan.repository.CustomerRepository;
+import com.tangquan.repository.FavoriteListRepository;
 import com.tangquan.repository.PersonRepository;
 import com.tangquan.service.PersonService;
 import com.tangquan.system.enums.GatewayError;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,6 +176,60 @@ public class PersonServiceImpl implements PersonService {
         if (house != null) {
             addPersonRepository.delete(house.getId());
         }
+
+        res.put("success", true);
+        return res;
+
+    }
+
+    @Autowired
+    FavoriteListRepository favoriteListRepository;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Override
+    public Map findOneById(DetailReq detailReq) {
+        Map res = new HashMap();
+        Person person = personRepository.findOneById(Integer.valueOf(detailReq.getProduct_id()));
+        if (person != null) {
+            res.put("data", person);
+
+            Favorite favorite = favoriteListRepository.findOnePersonByProductId(detailReq.getProduct_id(), detailReq.getCustomer_id());
+            if (favorite != null) {
+                res.put("favorited", true);
+            } else {
+                res.put("favorited", false);
+            }
+
+            // 自己创建的可以删除，不能预约
+            if (person.getCreator_id().equals(Integer.valueOf(detailReq.getCustomer_id()))) {
+                res.put("canOrder", false);
+                res.put("canDelete", true);
+
+            } else {
+                res.put("canOrder", true);
+                res.put("canDelete", false);
+            }
+            Customer customer = customerRepository.findOneById(person.getCreator_id());
+            if (person.getSeentime_id().equals(20901)) {
+                if (customer != null) {
+                    res.put("customer_mobile", customer.getUsername());
+                }
+            } else {
+
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 2);
+
+
+                if (calendar.getTime().getTime() > person.getCreate_time().getTime() ) {
+                    res.put("customer_mobile", customer.getUsername());
+                }
+            }
+
+        } else {
+            res.put("data", new HashMap());
+        }
+
 
         res.put("success", true);
         return res;

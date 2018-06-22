@@ -4,6 +4,7 @@ package com.tangquan.service;
 import com.tangquan.model.AddHouse;
 import com.tangquan.model.Evaluate;
 import com.tangquan.model.House;
+import com.tangquan.model.request.DetailReq;
 import com.tangquan.model.request.HouseListReq;
 import com.tangquan.model.request.OrderReq;
 import org.springframework.data.domain.Page;
@@ -56,4 +57,6 @@ public interface HouseService {
      * @param evaluate
      */
     Map evaluate(Evaluate evaluate);
+
+    Map findOneById(DetailReq detailReq);
 }

@@ -1,18 +1,15 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.AddPerson;
-import com.tangquan.model.House;
-import com.tangquan.model.request.HouseListReq;
+import com.tangquan.model.request.DetailReq;
 import com.tangquan.model.request.PersonListReq;
 import com.tangquan.model.response.ApiResponse;
 import com.tangquan.service.CustomerService;
-import com.tangquan.service.HouseService;
 import com.tangquan.service.PersonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -39,14 +36,10 @@ public class WechatPersonController {
         return ApiResponse.ok(personService.getAllPersonBySearch(personListReq));
     }
 
-
-    @Autowired
-    HouseService houseService;
-
     @ApiOperation(value = "合租人详情")
     @PostMapping("/get")
-    public ApiResponse<Page<House>> get(@Validated @RequestBody HouseListReq houseListReq) {
-        return ApiResponse.ok(houseService.getAllHouse(houseListReq));
+    public ApiResponse<Map> get(@Validated @RequestBody DetailReq detailReq) {
+        return ApiResponse.ok(personService.findOneById(detailReq));
     }
 
     @Autowired

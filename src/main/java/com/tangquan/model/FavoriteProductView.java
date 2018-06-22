@@ -445,4 +445,5 @@ public class FavoriteProductView {
     public void setPerson_seentime_id(Integer person_seentime_id) {
         this.person_seentime_id = person_seentime_id;
     }
+
 }

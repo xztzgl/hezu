@@ -23,4 +23,6 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     Page<Customer> findByUsernameLike(String username, Pageable pageRequest);
 
     Customer findByUsernameLike(String username);
+
+    Customer findOneById(Integer id);
 }

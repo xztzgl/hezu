@@ -1,11 +1,10 @@
 package com.tangquan.service.impl;
 
 import com.tangquan.model.*;
+import com.tangquan.model.request.DetailReq;
 import com.tangquan.model.request.HouseListReq;
 import com.tangquan.model.request.OrderReq;
-import com.tangquan.repository.AddHouseRepository;
-import com.tangquan.repository.AddOrderRepository;
-import com.tangquan.repository.HouseRepository;
+import com.tangquan.repository.*;
 import com.tangquan.service.HouseService;
 import com.tangquan.service.OrderService;
 import com.tangquan.system.enums.GatewayError;
@@ -13,14 +12,14 @@ import com.tangquan.system.exception.ApiException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -220,6 +219,62 @@ public class HouseServiceImpl implements HouseService {
             res.put("success", false);
         }
 
+        return res;
+
+    }
+
+    @Autowired
+    FavoriteListRepository favoriteListRepository;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Override
+    public Map findOneById(DetailReq detailReq) {
+        Map res = new HashMap();
+        House house = houseRepository.findOneById(Integer.valueOf(detailReq.getProduct_id()));
+        if (house != null) {
+            res.put("data", house);
+
+            Favorite favorite = favoriteListRepository.findOneHouseByProductId(detailReq.getProduct_id(), detailReq.getCustomer_id());
+            if (favorite != null) {
+                res.put("favorited", true);
+            } else {
+                res.put("favorited", false);
+            }
+
+
+            // 自己创建的可以删除，不能预约
+            if (house.getCreator_id().equals(Integer.valueOf(detailReq.getCustomer_id()))) {
+                res.put("canOrder", false);
+                res.put("canDelete", true);
+
+            } else {
+                res.put("canOrder", true);
+                res.put("canDelete", false);
+            }
+
+            Customer customer = customerRepository.findOneById(house.getCreator_id());
+            if (house.getSeentime_id().equals(20901)) {
+                if (customer != null) {
+                    res.put("customer_mobile", customer.getUsername());
+                }
+            } else {
+
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 2);
+
+
+                if (calendar.getTime().getTime() > house.getCreate_time().getTime() ) {
+                    res.put("customer_mobile", customer.getUsername());
+                }
+            }
+
+        } else {
+            res.put("data", new HashMap());
+        }
+
+
+        res.put("success", true);
         return res;
 
     }
