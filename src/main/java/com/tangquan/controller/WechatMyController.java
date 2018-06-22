@@ -1,16 +1,14 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.Customer;
-import com.tangquan.model.House;
-import com.tangquan.model.request.CustomerListReq;
-import com.tangquan.model.request.HouseListReq;
+import com.tangquan.model.request.MyReq;
 import com.tangquan.model.response.ApiResponse;
-import com.tangquan.service.CustomerService;
+import com.tangquan.repository.CustomerRepository;
+import com.tangquan.repository.OrderListRepository;
 import com.tangquan.service.HouseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Djoz
@@ -34,26 +34,47 @@ public class WechatMyController {
 
     @Autowired
     HouseService houseService;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    OrderListRepository orderListRepository;
 
     @ApiOperation(value = "我的首页")
     @PostMapping("/customer")
-    public ApiResponse<Page<House>> customer(@Validated @RequestBody HouseListReq houseListReq) {
-        return ApiResponse.ok(houseService.getAllHouse(houseListReq));
+    public ApiResponse<Map> customer(@Validated @RequestBody MyReq myReq) {
+
+        Map res = new HashMap();
+        Map data = new HashMap();
+
+        Customer customer =  customerRepository.findOneById(Integer.valueOf(myReq.getCustomer_id()));
+
+        List order = orderListRepository.findByCustomer_id(myReq.getCustomer_id());
+
+        data.put("username", customer.getUsername());
+        data.put("score", customer.getScore());
+        data.put("avatar", customer.getAvatar());
+        data.put("totalOrder", order.size());
+
+
+
+        res.put("data", data);
+        res.put("success", true);
+        return ApiResponse.ok(res);
     }
 
-    @Autowired
-    CustomerService customerService;
+//    @Autowired
+//    CustomerService customerService;
 
-    @ApiOperation(value = "我的列表")
-    @PostMapping("/list")
-    public ApiResponse<Page<Customer>> list(@Validated @RequestBody CustomerListReq customerListReq) {
-        if (Objects.nonNull(customerListReq.getSearch()) && customerListReq.getSearch() != "") {
-            return ApiResponse.ok(customerService.getCustomerByUsername(customerListReq.getSearch()));
-        } else {
-            return ApiResponse.ok(customerService.getAllCustomer(customerListReq));
-        }
-
-    }
+//    @ApiOperation(value = "我的列表")
+//    @PostMapping("/list")
+//    public ApiResponse<Page<Customer>> list(@Validated @RequestBody CustomerListReq customerListReq) {
+//        if (Objects.nonNull(customerListReq.getSearch()) && customerListReq.getSearch() != "") {
+//            return ApiResponse.ok(customerService.getCustomerByUsername(customerListReq.getSearch()));
+//        } else {
+//            return ApiResponse.ok(customerService.getAllCustomer(customerListReq));
+//        }
+//
+//    }
 
 
 
