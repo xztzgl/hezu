@@ -16,5 +16,4 @@ public interface HouseRepository extends JpaRepository<House,Integer> {
     House findOneById(Integer id);
 
 
-
 }
