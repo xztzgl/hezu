@@ -23,6 +23,12 @@ public interface NoticeService {
     Page<Notice> getAllNotice(NoticeListReq noticeListReq);
 
     /**
+     * 根据条件获取所有用户列表
+     * @return
+     */
+    Page<Notice> getAllNoticeBySearch(NoticeListReq noticeListReq);
+
+    /**
      * 添加菜单
      * @param noticeReq
      */

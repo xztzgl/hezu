@@ -36,6 +36,14 @@ public class NoticeServiceImpl implements NoticeService {
         return noticeList;
     }
 
+
+    @Override
+    public Page<Notice> getAllNoticeBySearch(NoticeListReq noticeListReq) {
+        Page<Notice> favoriteList = noticeRepository.findByCustomer_id(noticeListReq.getCustomer_id(), new PageRequest(Integer.valueOf(noticeListReq.getPage()), Integer.valueOf(noticeListReq.getLimit())));
+
+        return favoriteList;
+    }
+
     @Autowired
 
     AddNoticeRepository addNoticeRepository;

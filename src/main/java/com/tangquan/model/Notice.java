@@ -25,7 +25,7 @@ public class Notice {
 
     @ApiModelProperty(value = "客户对应id",required = true)
     @Column(name = "customer_id", nullable = false)
-    private Integer customer_id;
+    private String customer_id;
 
     @ApiModelProperty(value = "发送方式",required = true)
     @Column(name = "method", nullable = false)
@@ -65,11 +65,11 @@ public class Notice {
         this.id = id;
     }
 
-    public Integer getCustomer_id() {
+    public String getCustomer_id() {
         return customer_id;
     }
 
-    public void setCustomer_id(Integer customer_id) {
+    public void setCustomer_id(String customer_id) {
         this.customer_id = customer_id;
     }
 

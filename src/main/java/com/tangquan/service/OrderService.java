@@ -2,6 +2,9 @@ package com.tangquan.service;
 
 
 import com.tangquan.model.Order;
+import com.tangquan.model.OrderProductView;
+import com.tangquan.model.request.OrderListReq;
+import org.springframework.data.domain.Page;
 
 import java.util.Map;
 
@@ -19,6 +22,11 @@ public interface OrderService {
 //     */
 //    Page<Order> getAllHouse(HouseListReq houseListReq);
 
+    /**
+     * 根据条件获取所有用户列表
+     * @return
+     */
+    Page<OrderProductView> getAllOrderBySearch(OrderListReq orderListReq);
     /**
      * 添加
      * @param order

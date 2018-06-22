@@ -1,9 +1,7 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.AddHouse;
-import com.tangquan.model.Evaluate;
 import com.tangquan.model.request.HouseListReq;
-import com.tangquan.model.request.OrderReq;
 import com.tangquan.model.response.ApiResponse;
 import com.tangquan.service.HouseService;
 import io.swagger.annotations.Api;
@@ -63,17 +61,6 @@ public class WechatHouseController {
         return ApiResponse.ok(houseService.delete(id));
     }
 
-    @ApiOperation(value = "预约")
-    @PostMapping("/order")
-    public ApiResponse<Map> order(@Validated @RequestBody OrderReq orderReq) {
-        return ApiResponse.ok(houseService.order(orderReq));
-    }
-
-    @ApiOperation(value = "评价")
-    @PostMapping("/evaluate")
-    public ApiResponse<Map> evaluate(@Validated @RequestBody Evaluate evaluate) {
-        return ApiResponse.ok(houseService.evaluate(evaluate));
-    }
 
 
 }

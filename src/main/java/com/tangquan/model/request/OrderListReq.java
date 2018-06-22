@@ -8,8 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
  * Date: 17/12/1
  * Time: 下午2:50
  */
-@ApiModel(value = "NoticeListReq",description = "消息列表")
-public class NoticeListReq {
+@ApiModel(value = "OrderListReq",description = "订单列表")
+public class OrderListReq {
+
 
     @ApiModelProperty(value = "每页条数")
     private String limit;
@@ -17,9 +18,10 @@ public class NoticeListReq {
     @ApiModelProperty(value = "第几页")
     private String page;
 
-    //    以下为wechat端使用
+//    以下为wechat端使用
     @ApiModelProperty(value = "客户对应的id",required = true)
     private String customer_id;
+
 
     public String getLimit() {
         return limit;

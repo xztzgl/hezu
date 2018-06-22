@@ -1,10 +1,15 @@
 package com.tangquan.service.impl;
 
 import com.tangquan.model.Order;
+import com.tangquan.model.OrderProductView;
+import com.tangquan.model.request.OrderListReq;
 import com.tangquan.repository.AddOrderRepository;
+import com.tangquan.repository.OrderListRepository;
 import com.tangquan.service.OrderService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -29,6 +34,15 @@ public class OrderServiceImpl implements OrderService {
 //
 //        return houseList;
 //    }
+
+    @Autowired
+    OrderListRepository orderListRepository;
+    @Override
+    public Page<OrderProductView> getAllOrderBySearch(OrderListReq orderListReq) {
+        Page<OrderProductView> favoriteList = orderListRepository.findByCustomer_id(orderListReq.getCustomer_id(), new PageRequest(Integer.valueOf(orderListReq.getPage()), Integer.valueOf(orderListReq.getLimit())));
+
+        return favoriteList;
+    }
 
     @Autowired
     AddOrderRepository addOrderRepository;

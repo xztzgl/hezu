@@ -1,6 +1,6 @@
 package com.tangquan.repository;
 
-import com.tangquan.model.Notice;
+import com.tangquan.model.OrderProductView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,9 +15,10 @@ import org.springframework.stereotype.Repository;
  * Time: 下午5:47
  */
 @Repository
-public interface NoticeRepository extends JpaRepository<Notice,Integer> {
+public interface OrderListRepository extends JpaRepository<OrderProductView,Integer> {
 
-    @Query(value = "select a From Notice a where a.customer_id = :customer_id ")
-    Page<Notice> findByCustomer_id(@Param("customer_id") String customer_id, Pageable pageRequest);
+
+    @Query(value = "select a From OrderProductView a where a.customer_id = :customer_id ")
+    Page<OrderProductView> findByCustomer_id(@Param("customer_id") String customer_id, Pageable pageRequest);
 
 }
