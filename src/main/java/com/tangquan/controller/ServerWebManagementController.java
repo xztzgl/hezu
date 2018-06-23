@@ -155,7 +155,7 @@ public class ServerWebManagementController {
     @ApiOperation(value = "添加通知信息")
     @PostMapping("/notice/add")
     public ApiResponse<Map> add(@Validated @RequestBody NoticeReq noticeReq) {
-        return ApiResponse.ok(noticeService.add(noticeReq));
+        return ApiResponse.ok(noticeService.add(noticeReq, 21301));
     }
 
 }

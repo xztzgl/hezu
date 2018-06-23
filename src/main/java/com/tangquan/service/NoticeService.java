@@ -32,6 +32,6 @@ public interface NoticeService {
      * 添加菜单
      * @param noticeReq
      */
-    Map add(NoticeReq noticeReq);
+    Map add(NoticeReq noticeReq, Integer typeCode);
 
 }

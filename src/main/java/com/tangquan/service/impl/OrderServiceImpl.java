@@ -2,9 +2,11 @@ package com.tangquan.service.impl;
 
 import com.tangquan.model.Order;
 import com.tangquan.model.OrderProductView;
+import com.tangquan.model.request.NoticeReq;
 import com.tangquan.model.request.OrderListReq;
 import com.tangquan.repository.AddOrderRepository;
 import com.tangquan.repository.OrderListRepository;
+import com.tangquan.service.NoticeService;
 import com.tangquan.service.OrderService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     AddOrderRepository addOrderRepository;
+    @Autowired
+    NoticeService noticeService;
     @Override
     public Map add(Order order) {
         Map res = new HashMap();
@@ -55,6 +59,15 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus_id("21001");
         order.setCreate_time(new java.util.Date());
         addOrderRepository.save(order);
+
+        NoticeReq noticeReq = new NoticeReq();
+        noticeReq.setCustomer_id(Integer.valueOf(order.getCustomer_id()));
+        noticeReq.setMethod(21201);
+        noticeReq.setProduct_id(Integer.valueOf(order.getProduct_id()));
+        noticeReq.setProduct_type(1);
+        noticeReq.setText("您预约了一个房屋，别忘了和房主联系哦");
+
+        noticeService.add(noticeReq, 21302);
 
         res.put("value", order.getId());
         res.put("success", true);

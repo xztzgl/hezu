@@ -59,11 +59,11 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Transactional
     @Override
-    public Map add(NoticeReq noticeReq) {
+    public Map add(NoticeReq noticeReq, Integer typeCode) {
         Map res = new HashMap();
         AddNotice addNotice = new AddNotice();
         BeanUtils.copyProperties(noticeReq, addNotice);
-        addNotice.setType(21301);
+        addNotice.setType(typeCode);
         addNotice.setCreate_time(new java.util.Date());
         addNoticeRepository.save(addNotice);
 
