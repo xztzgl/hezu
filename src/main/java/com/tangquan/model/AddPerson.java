@@ -39,8 +39,8 @@ public class AddPerson {
     @Column(name = "gender_id", nullable = false)
     private String gender_id;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "入住时间",required = true)
     @Column(name = "checkin_time", nullable = false)
     private Date checkin_time;
@@ -71,8 +71,8 @@ public class AddPerson {
     @Column(name = "seentime_id", nullable = false)
     private String seentime_id;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "创建时间",required = true)
     @Column(name = "create_time", nullable = false)
     private Date create_time;

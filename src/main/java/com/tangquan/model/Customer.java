@@ -29,8 +29,8 @@ public class Customer {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "创建时间",required = true)
     @Column(name = "create_time", nullable = false)
     private Date create_time;
@@ -40,7 +40,7 @@ public class Customer {
     private Integer gender;
 
     @DateTimeFormat(pattern = "yyyy")
-    @JsonFormat(pattern = "yyyy", timezone = "GMT + 8")
+    @JsonFormat(pattern = "yyyy", timezone = "GMT+8")
     @ApiModelProperty(value = "出生年份",required = true)
     @Column(name = "birth_year", nullable = false)
     private Date birth_year;

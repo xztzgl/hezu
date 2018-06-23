@@ -47,8 +47,8 @@ public class AddNotice {
     @Column(name = "product_type", nullable = false)
     private Integer product_type;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(value = "创建时间",required = true)
     @Column(name = "create_time", nullable = false)

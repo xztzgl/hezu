@@ -35,20 +35,20 @@ public class Order {
     @Column(name = "customer_id", nullable = false)
     private String customer_id;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "创建时间",required = true)
     @Column(name = "create_time", nullable = false)
     private Date create_time;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "评价即完成",required = true)
     @Column(name = "finish_time", nullable = false)
     private Date finish_time;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "签约时间",required = true)
     @Column(name = "sign_time", nullable = false)
     private Date sign_time;

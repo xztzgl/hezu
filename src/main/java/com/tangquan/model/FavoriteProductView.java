@@ -84,8 +84,8 @@ public class FavoriteProductView {
     @Column(name = "house_gender_id", nullable = false)
     private Integer house_gender_id;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "入住时间",required = true)
     @Column(name = "house_checkin_time", nullable = false)
     private Date house_checkin_time;
@@ -118,8 +118,8 @@ public class FavoriteProductView {
     @Column(name = "house_publish_id", nullable = false)
     private Integer house_publish_id;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "创建时间",required = true)
     @Column(name = "house_create_time", nullable = false)
     private Date house_create_time;
@@ -140,8 +140,8 @@ public class FavoriteProductView {
     @Column(name = "person_gender_id", nullable = false)
     private Integer person_gender_id;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT + 8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "入住时间",required = true)
     @Column(name = "person_checkin_time", nullable = false)
     private Date person_checkin_time;

@@ -5,7 +5,7 @@ spring:
     active: ${ENV_NAME:dev}
   datasource:
 #    url: jdbc:mysql://192.168.30.34:3306/user_manage?useSSL=false&useUnicode=true&characterEncoding=utf-8
-    url: jdbc:mysql://localhost:3306/hezu?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/hezu?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
     username: root
 #    password: 123456
     password: aa123123
