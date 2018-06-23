@@ -65,10 +65,6 @@ public class NoticeServiceImpl implements NoticeService {
         BeanUtils.copyProperties(noticeReq, addNotice);
         addNotice.setType(typeCode);
 
-//        Calendar calendar = Calendar.getInstance();
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-//        format.format(calendar.getTime());
-
         addNotice.setCreate_time(new java.util.Date());
         addNoticeRepository.save(addNotice);
 

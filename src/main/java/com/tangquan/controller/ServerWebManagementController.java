@@ -103,10 +103,20 @@ public class ServerWebManagementController {
     @DeleteMapping("/house/delete/{id}")
     public ApiResponse<Map> houseDelete(@ApiParam(value = "房屋ID", required = true) @PathVariable Integer id) {
         Map res = new HashMap();
+        AddHouse willDelete = addHouseRepository.findOneById(id);
+
         addHouseRepository.delete(id);
 
         AddHouse house = addHouseRepository.findOneById(id);
         if (house == null) {
+            NoticeReq noticeReq = new NoticeReq();
+            noticeReq.setCustomer_id(Integer.valueOf(willDelete.getCreator_id()));
+            noticeReq.setMethod(21201);
+            noticeReq.setProduct_id(willDelete.getId());
+            noticeReq.setProduct_type(1);
+            noticeReq.setText("您发布的信息因违规已被管理员删除，由此给您带来不便，请您谅解！");
+
+            noticeService.add(noticeReq, 21302);
             res.put("success", true);
         } else {
             res.put("success", false);
@@ -120,11 +130,20 @@ public class ServerWebManagementController {
     @DeleteMapping("/person/delete/{id}")
     public ApiResponse<Map> personDelete(@ApiParam(value = "合租者ID", required = true) @PathVariable Integer id) {
         Map res = new HashMap();
+        AddPerson willDelete = addPersonRepository.findOneById(id);
         addPersonRepository.delete(id);
 
         AddPerson person = addPersonRepository.findOneById(id);
 
         if (person == null) {
+            NoticeReq noticeReq = new NoticeReq();
+            noticeReq.setCustomer_id(Integer.valueOf(willDelete.getCreator_id()));
+            noticeReq.setMethod(21201);
+            noticeReq.setProduct_id(willDelete.getId());
+            noticeReq.setProduct_type(2);
+            noticeReq.setText("您发布的信息因违规已被管理员删除，由此给您带来不便，请您谅解！");
+
+            noticeService.add(noticeReq, 21302);
             res.put("success", true);
         } else {
             res.put("success", false);
