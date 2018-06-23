@@ -25,4 +25,5 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     Customer findByUsernameLike(String username);
 
     Customer findOneById(Integer id);
+
 }

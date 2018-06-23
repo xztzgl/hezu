@@ -1,17 +1,17 @@
 package com.tangquan.controller;
 
-import com.tangquan.model.request.OrderRuleReq;
+import com.tangquan.model.request.StatisticReq;
 import com.tangquan.model.response.ApiResponse;
-import com.tangquan.service.OrderRuleService;
+import com.tangquan.service.StatisticService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Djoz
@@ -25,18 +25,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class ServerWebStatisticController {
 
     @Autowired
-    OrderRuleService orderRuleService;
+    StatisticService statisticService;
 
     @ApiOperation(value = "用户分析菜单")
-    @PostMapping("/user")
-    public ApiResponse<Integer> user(@Validated @RequestBody OrderRuleReq orderRuleReq) {
-        return ApiResponse.ok(orderRuleService.add(orderRuleReq));
+    @GetMapping("/user")
+    public ApiResponse<Map> user() {
+        return ApiResponse.ok(statisticService.getUser());
     }
 
     @ApiOperation(value = "订单分析菜单")
-    @PostMapping("/appointment")
-    public ApiResponse<Integer> appointment(@Validated @RequestBody OrderRuleReq orderRuleReq) {
-        return ApiResponse.ok(orderRuleService.add(orderRuleReq));
+    @GetMapping("/appointment/yesterday")
+    public ApiResponse<Map> appointmentYesterday() {
+        return ApiResponse.ok(statisticService.appointmentYesterday());
     }
+
+    @ApiOperation(value = "订单分析菜单图表分析")
+    @PostMapping("/appointment/statistic")
+    public ApiResponse<List> appointmentStatistic(@Validated @RequestBody StatisticReq statisticReq) {
+        return ApiResponse.ok(statisticService.appointmentStatistic(statisticReq));
+    }
+
+//    @ApiOperation(value = "订单分析菜单")
+//    @PostMapping("/appointment")
+//    public ApiResponse<Integer> appointment(@Validated @RequestBody OrderRuleReq orderRuleReq) {
+//        return ApiResponse.ok(orderRuleService.add(orderRuleReq));
+//    }
 
 }

@@ -2,6 +2,8 @@ package com.tangquan.repository;
 
 import com.tangquan.model.AddPerson;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,4 +16,8 @@ import org.springframework.stereotype.Repository;
 public interface AddPersonRepository extends JpaRepository<AddPerson,Integer> {
 
     AddPerson findOneById(Integer id);
+
+    @Modifying
+    @Query("update AddPerson t set t.publish_id = ?1 where t.id = ?2")
+    int updatePublish(String publish_id,Integer id);
 }
