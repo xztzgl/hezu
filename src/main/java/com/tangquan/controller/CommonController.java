@@ -50,4 +50,6 @@ public class CommonController {
         return ApiResponse.ok(DistrictService.getAllDistrict());
     }
 
+
+
 }

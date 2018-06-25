@@ -43,3 +43,10 @@ tq:
 cbank:
   local:
     bankCode: C1010332000030 #网点 默认金库
+
+aliyun:
+  key: LTAIjLMuN7bqjTX1
+  secret: HoyrK56Syz39tUA46ccjpfj5NP51qV
+  bucketName: hezu
+  endpoint: oss-cn-beijing.aliyuncs.com
+  domain: hezu.oss-cn-beijing.aliyuncs.com

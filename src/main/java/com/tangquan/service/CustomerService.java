@@ -4,6 +4,7 @@ package com.tangquan.service;
 import com.tangquan.model.Customer;
 import com.tangquan.model.request.AddCustomerReq;
 import com.tangquan.model.request.CustomerListReq;
+import com.tangquan.model.request.CustomerLoginReq;
 import org.springframework.data.domain.Page;
 
 import java.util.Map;
@@ -30,5 +31,6 @@ public interface CustomerService {
 
     Map addCustomer(AddCustomerReq addCustomerReq);
     Map getCode(String username);
+    Map login(CustomerLoginReq customerLoginReq);
 
 }

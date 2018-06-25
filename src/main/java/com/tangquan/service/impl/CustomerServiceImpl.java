@@ -1,8 +1,10 @@
 package com.tangquan.service.impl;
 
+import com.tangquan.framework.JWTHelper;
 import com.tangquan.model.Customer;
 import com.tangquan.model.request.AddCustomerReq;
 import com.tangquan.model.request.CustomerListReq;
+import com.tangquan.model.request.CustomerLoginReq;
 import com.tangquan.repository.CustomerRepository;
 import com.tangquan.service.CustomerService;
 import org.apache.commons.beanutils.BeanUtils;
@@ -99,6 +101,7 @@ public class CustomerServiceImpl implements CustomerService {
             addCustomer.setId(0);
             addCustomer.setUsername(username);
             addCustomer.setPassword(verifyCode);
+            addCustomer.setCreate_time(new java.util.Date());
             customerRepository.save(addCustomer);
 
         } else {
@@ -109,6 +112,38 @@ public class CustomerServiceImpl implements CustomerService {
 
         res.put("verifyCode", verifyCode);
         res.put("success", true);
+
+        return res;
+    }
+
+    @Autowired
+    JWTHelper jwtHelper;
+
+    public Map login(CustomerLoginReq customerLoginReq) {
+        Map res = new HashMap();
+
+        String username = customerLoginReq.getUsername();
+        String password = customerLoginReq.getPassword();
+
+        Customer user = customerRepository.findOneByUsername(username);
+
+        //生成token
+        String jwtStr = jwtHelper.createJWT(null, username, password);
+
+        if (user != null && user.getPassword().equals(password)) {
+
+            user.setUpdate_time(new java.util.Date());
+            customerRepository.save(user);
+            if (user.getGender() != null && user.getVocation() != null && user.getDistrict() != null && user.getBirth_year() != null) {
+                res.put("signed", true);
+            } else {
+                res.put("signed", false);
+            }
+            res.put("token", jwtStr);
+            res.put("success", true);
+        } else {
+            res.put("success", false);
+        }
 
         return res;
     }

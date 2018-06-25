@@ -1,6 +1,7 @@
 package com.tangquan.controller;
 
 import com.tangquan.model.request.AddCustomerReq;
+import com.tangquan.model.request.CustomerLoginReq;
 import com.tangquan.model.response.ApiResponse;
 import com.tangquan.service.CustomerService;
 import io.swagger.annotations.Api;
@@ -35,14 +36,11 @@ public class WechatLoginController {
     }
 
 
-//    @Autowired
-//    HouseService houseService;
-//
-//    @ApiOperation(value = "登录")
-//    @PostMapping("/login")
-//    public ApiResponse<Page<House>> house(@Validated @RequestBody HouseListReq houseListReq) {
-//        return ApiResponse.ok(houseService.getAllHouse(houseListReq));
-//    }
+    @ApiOperation(value = "登录")
+    @PostMapping("/login")
+    public ApiResponse<Map> house(@Validated @RequestBody CustomerLoginReq customerLoginReq) {
+        return ApiResponse.ok(customerService.login(customerLoginReq));
+    }
 
 
     @ApiOperation(value = "注册")
