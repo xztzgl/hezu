@@ -29,6 +29,10 @@ public class Customer {
     @Column(name = "username", nullable = false)
     private String username;
 
+    @ApiModelProperty(value = "密码-验证码",required = true)
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "创建时间",required = true)
@@ -39,11 +43,9 @@ public class Customer {
     @Column(name = "gender", nullable = false)
     private Integer gender;
 
-    @DateTimeFormat(pattern = "yyyy")
-    @JsonFormat(pattern = "yyyy", timezone = "GMT+8")
     @ApiModelProperty(value = "出生年份",required = true)
     @Column(name = "birth_year", nullable = false)
-    private Date birth_year;
+    private String birth_year;
 
     @ApiModelProperty(value = "职业",required = true)
     @Column(name = "vocation", nullable = false)
@@ -102,11 +104,11 @@ public class Customer {
     }
 
 
-    public Date getBirth_year() {
+    public String getBirth_year() {
         return birth_year;
     }
 
-    public void setBirth_year(Date birth_year) {
+    public void setBirth_year(String birth_year) {
         this.birth_year = birth_year;
     }
 
@@ -168,5 +170,13 @@ public class Customer {
 
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
