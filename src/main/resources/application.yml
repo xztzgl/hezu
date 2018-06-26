@@ -47,6 +47,11 @@ cbank:
 aliyun:
   key: LTAIjLMuN7bqjTX1
   secret: HoyrK56Syz39tUA46ccjpfj5NP51qV
-  bucketName: hezu
-  endpoint: oss-cn-beijing.aliyuncs.com
-  domain: hezu.oss-cn-beijing.aliyuncs.com
+  oss:
+    bucketName: hezu
+    endpoint: oss-cn-beijing.aliyuncs.com
+    domain: hezu.oss-cn-beijing.aliyuncs.com
+  sms:
+    endpoint: http://1943695596114318.mns.cn-beijing-internal-vpc.aliyuncs.com
+    topic: sms.topic-cn-beijing
+    sign: 好合租

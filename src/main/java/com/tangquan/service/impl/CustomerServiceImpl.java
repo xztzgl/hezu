@@ -7,6 +7,7 @@ import com.tangquan.model.request.CustomerListReq;
 import com.tangquan.model.request.CustomerLoginReq;
 import com.tangquan.repository.CustomerRepository;
 import com.tangquan.service.CustomerService;
+import com.tangquan.service.SmsSenderService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,9 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Author: wangfeng
@@ -83,6 +82,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     // 获取验证码
+    @Autowired
+    SmsSenderService smsSenderService;
+
     @Override
     @Transactional
     public Map getCode(String username) {
@@ -109,6 +111,16 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepository.save(user);
         }
 
+
+        SmsParameter parameter = new SmsParameter();
+        parameter.setTemplateCode("SMS_137890060");
+        parameter.setSignName("好合租");
+        List phonenumberList = new ArrayList();
+        phonenumberList.add(username);
+        parameter.setParams("{\"code\":\"" + verifyCode + "\"}");
+        parameter.setPhoneNumbers(phonenumberList);
+
+        smsSenderService.send(parameter);
 
         res.put("verifyCode", verifyCode);
         res.put("success", true);

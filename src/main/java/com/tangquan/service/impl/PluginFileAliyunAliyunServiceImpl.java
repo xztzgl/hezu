@@ -17,7 +17,7 @@ import java.io.IOException;
 @Service
 public class PluginFileAliyunAliyunServiceImpl implements PluginFileAliyunService {
 
-    @Value("${aliyun.endpoint}")
+    @Value("${aliyun.oss.endpoint}")
     private String endpoint;
 
     @Value("${aliyun.key}")
@@ -26,10 +26,10 @@ public class PluginFileAliyunAliyunServiceImpl implements PluginFileAliyunServic
     @Value("${aliyun.secret}")
     private String accessKeySecret;
 
-    @Value("${aliyun.bucketName}")
+    @Value("${aliyun.oss.bucketName}")
     private String bucketName;
 
-    @Value("${aliyun.domain}")
+    @Value("${aliyun.oss.domain}")
     private String domain;
 
 
