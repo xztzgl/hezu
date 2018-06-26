@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +68,7 @@ public class HouseServiceImpl implements HouseService {
             sql += " and t.rental >= :rental_min"; //根据下标
             sql += " and t.rental < :rental_max"; //根据下标
         }
+        sql += " order by t.create_time desc";
 
         Query query = em.createQuery(sql);// 这里做个更正
 

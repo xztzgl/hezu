@@ -71,6 +71,8 @@ public class PersonServiceImpl implements PersonService {
             sql += " and t.rental < :rental_max"; //根据下标
         }
 
+        sql += " order by t.create_time desc";
+
         Query query = em.createQuery(sql);// 这里做个更正
 
         query.setFirstResult(page * limit);
