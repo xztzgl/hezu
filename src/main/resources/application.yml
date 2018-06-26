@@ -51,7 +51,3 @@ aliyun:
     bucketName: hezu
     endpoint: oss-cn-beijing.aliyuncs.com
     domain: hezu.oss-cn-beijing.aliyuncs.com
-  sms:
-    endpoint: http://1943695596114318.mns.cn-beijing-internal-vpc.aliyuncs.com
-    topic: sms.topic-cn-beijing
-    sign: 好合租
