@@ -4,10 +4,11 @@ spring:
   profiles:
     active: ${ENV_NAME:dev}
   datasource:
-#    url: jdbc:mysql://192.168.30.34:3306/user_manage?useSSL=false&useUnicode=true&characterEncoding=utf-8
+#    url: jdbc:mysql://172.17.0.2:3306/hezu?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
+#    username: hezu
+#    password: xaxRGLGFLRwJKQ49
     url: jdbc:mysql://localhost:3306/hezu?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
     username: root
-#    password: 123456
     password: aa123123
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
@@ -16,7 +17,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 server:
-  port: 9000
+  port: 8080
   servlet:
       context-path: /
 
@@ -37,7 +38,7 @@ tq:
   framework:
     jwt:
       secret: www.itangquan.com
-      ttl-seconds: 36000
+      ttl-seconds: 360000
       refresh-window-seconds: 60
 
 cbank:

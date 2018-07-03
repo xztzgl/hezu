@@ -16,8 +16,9 @@ import javax.persistence.*;
 public class Favorite {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ApiModelProperty(value = "id",required = true)
+    @ApiModelProperty(value = "id")
     private Integer id;
+
 
     @ApiModelProperty(value = "商品类型id  1-房源house、2-人person",required = true)
     @Column(name = "product_type", nullable = false)
@@ -32,12 +33,12 @@ public class Favorite {
     @Column(name = "customer_id", nullable = false)
     private String customer_id;
 
-    public String getProduct_id() {
-        return product_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getProduct_type() {
@@ -46,6 +47,14 @@ public class Favorite {
 
     public void setProduct_type(String product_type) {
         this.product_type = product_type;
+    }
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public String getCustomer_id() {

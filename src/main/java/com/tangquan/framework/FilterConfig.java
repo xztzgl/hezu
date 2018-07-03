@@ -13,7 +13,25 @@ public class FilterConfig {
     @Bean
     public FilterRegistrationBean jwtFilterRegistration(JWTFilter filter) {
         FilterRegistrationBean registrationBean = newFilterRegistrationBean(filter, 11);
-        String[] patterns = new String[]{"/admin-user/*", "/auth-group/*", "/order-manage/*", "/server-web-management/*"};
+        String[] patterns = new String[]{
+            "/admin-user/*",
+            "/auth-group/*",
+            "/order-manage/*",
+            "/server-web-management/*",
+            "/server-web-statistic/*",
+            "/upload/*",
+            "/wechat-favorite/*",
+            "/wechat-house/add",
+            "/wechat-house/delete/{id}",
+            "/wechat-house/update",
+            "/wechat-my/*",
+            "/wechat-notice/*",
+            "/wechat-order/*",
+            "/wechat-publish/*",
+            "/wechat-person/add",
+            "/wechat-person/delete/{id}",
+            "/wechat-person/update"
+        };
         registrationBean.addUrlPatterns(patterns);
         return registrationBean;
     }

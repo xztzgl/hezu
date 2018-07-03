@@ -49,9 +49,15 @@ public class FavoriteServiceImpl implements FavoriteService {
     public Map add(Favorite favorite) {
         Map res = new HashMap();
 
-        addFavoriteRepository.save(favorite);
+        Favorite resulte = addFavoriteRepository.findOneByCondition(favorite.getCustomer_id(), favorite.getProduct_id(), favorite.getProduct_type());
+        if (resulte != null) {
+            res.put("success", true);
+        } else {
+            addFavoriteRepository.save(favorite);
+            res.put("success", true);
+        }
 
-        res.put("success", true);
+
         return res;
     }
 

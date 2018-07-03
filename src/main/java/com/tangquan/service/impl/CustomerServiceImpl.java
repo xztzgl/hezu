@@ -82,6 +82,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     // 获取验证码
+
     @Autowired
     SmsSenderService smsSenderService;
 
@@ -122,7 +123,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         smsSenderService.send(parameter);
 
-        res.put("verifyCode", verifyCode);
+//        res.put("verifyCode", verifyCode);
         res.put("success", true);
 
         return res;
@@ -151,6 +152,7 @@ public class CustomerServiceImpl implements CustomerService {
             } else {
                 res.put("signed", false);
             }
+            res.put("customer_id", user.getId());
             res.put("token", jwtStr);
             res.put("success", true);
         } else {
