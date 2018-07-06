@@ -1,10 +1,12 @@
 package com.tangquan.service.impl;
 
+import com.tangquan.model.House;
 import com.tangquan.model.Order;
 import com.tangquan.model.OrderProductView;
 import com.tangquan.model.request.NoticeReq;
 import com.tangquan.model.request.OrderListReq;
 import com.tangquan.repository.AddOrderRepository;
+import com.tangquan.repository.HouseRepository;
 import com.tangquan.repository.OrderListRepository;
 import com.tangquan.service.NoticeService;
 import com.tangquan.service.OrderService;
@@ -14,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +54,8 @@ public class OrderServiceImpl implements OrderService {
     AddOrderRepository addOrderRepository;
     @Autowired
     NoticeService noticeService;
+    @Autowired
+    HouseRepository houseRepository;
     @Override
     public Map add(Order order) {
         Map res = new HashMap();
@@ -57,7 +63,8 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(order, newOrder);
         order.setId(0);
         order.setStatus_id("21001");
-        order.setCreate_time(new java.util.Date());
+        Date createTime = new java.util.Date();
+        order.setCreate_time(createTime);
         addOrderRepository.save(order);
 
         NoticeReq noticeReq = new NoticeReq();
@@ -69,8 +76,27 @@ public class OrderServiceImpl implements OrderService {
 
         noticeService.add(noticeReq, 21302);
 
-        res.put("value", order.getId());
+        House house = houseRepository.findOneById(Integer.valueOf(order.getProduct_id()));
+
         res.put("success", true);
+
+        if (house.getSeentime_id().equals(20901)) {
+            res.put("customer_mobile", house.getUsername());
+        } else {
+
+            Calendar calendar = Calendar.getInstance();
+
+            calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 2);
+
+
+            if (calendar.getTime().getTime() > createTime.getTime() ) {
+                res.put("customer_mobile", house.getUsername());
+            } else {
+                res.put("customer_mobile", "");
+            }
+        }
+
+
         return res;
     }
 

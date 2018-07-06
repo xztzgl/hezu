@@ -252,22 +252,22 @@ public class HouseServiceImpl implements HouseService {
                 res.put("canDelete", false);
             }
 
-            Customer customer = customerRepository.findOneById(house.getCreator_id());
-            if (house.getSeentime_id().equals(20901)) {
-                if (customer != null) {
-                    res.put("customer_mobile", customer.getUsername());
-                }
-            } else {
-
-                Calendar calendar = Calendar.getInstance();
-
-                calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 2);
-
-
-                if (calendar.getTime().getTime() > house.getCreate_time().getTime() ) {
-                    res.put("customer_mobile", customer.getUsername());
-                }
-            }
+//            Customer customer = customerRepository.findOneById(house.getCreator_id());
+//            if (house.getSeentime_id().equals(20901)) {
+//                if (customer != null) {
+//                    res.put("customer_mobile", customer.getUsername());
+//                }
+//            } else {
+//
+//                Calendar calendar = Calendar.getInstance();
+//
+//                calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 2);
+//
+//
+//                if (calendar.getTime().getTime() > house.getCreate_time().getTime() ) {
+//                    res.put("customer_mobile", customer.getUsername());
+//                }
+//            }
 
         } else {
             res.put("data", new HashMap());
